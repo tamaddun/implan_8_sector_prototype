@@ -9,8 +9,8 @@ st.set_page_config(page_title="IMPLAN Results",layout="wide")
 # st.title("Industry-specific Effects of CISFs")
 
 # Locate the files in the appropriate directory
-path = os.getcwd()+'\\AllData'
-files = glob.glob(path+'\\*.csv')
+path = './AllData'
+files = glob.glob(path+'/*.csv')
 
 # Load the data
 data = []
