@@ -48,7 +48,6 @@ data['Metric'] = data['Metric'].str.slice(start=2)
 # Rename metrics to add spaces
 data['Metric'] = data['Metric'].replace({'EmployeeCompensation': 'Employee Compensation', 'PropietorsIncome': "Proprietor's Income",'LaborIncome':'Labor Income','OtherPropertyTypeIncome':'Other Property Type Income','IndirectBusinessTaxes':'Indirect Business Taxes','TotalValueAdded':'Total Value Added'})
 data['Industry'] = data['Industry'].replace({'TIPU (Transportation, Information, Power and Utilities)':'TIPU'})
-# data.rename(columns={'Year': 'Year '},inplace=True)
 
 # Create lists to hold unique names of Metric, Attribute, and Scenario
 scenario = data['Scenario'].unique().tolist()
@@ -79,8 +78,12 @@ bar_chart = px.bar(data,
                     height=600,
                     width=800)
 
+bar_chart.update_layout(yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
+
 # Adjust axis limits
 bar_chart.update(layout_xaxis_range=[data['Value'].min(),data['Value'].max()+data['Value'].max()/50])
+
+bar_chart.update_layout(annotations=[dict(x=-0.1, y=-0.14, text="*TIPU = Transportation, Information, Power and Utilities", font=dict(size=10),showarrow=False, xref='paper', yref='paper')])
 
 # Change label styles
 bar_chart.update_layout(xaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(7, 90, 120)",size=20))))
@@ -88,7 +91,7 @@ bar_chart.update_layout(yaxis=dict(title=dict(text="<b>Industry</b>",font=dict(c
 # bar_chart.update_layout(title='<b>Contributions from Industries across the Life Cycles of CISFs</b>')
 
 bar_chart.update_layout(title={'text': "Contributions from Industries across the Life Cycles of CISFs",
-                               'y':0.96,
+                               'y':0.95,
                                'x':0.55,
                                'xanchor': 'center',
                                'yanchor': 'top',})
@@ -111,9 +114,19 @@ img {
     object-position: left;
 }
 """
-
 # Set the CSS style for the page
 st.write(f'<style>{css}</style>', unsafe_allow_html=True)
+
+style = """
+<style>
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+"""
+st.markdown(style, unsafe_allow_html=True)
 
 # Display the images with the desired position
 
@@ -126,7 +139,7 @@ elif scenario_selection == 'Large Hold 10' or scenario_selection == 'Small Hold 
 else:
     image = 'holdzero.jpg'
 
-col1, col2, col3 = st.columns([17.7,60,70])
+col1, col2, col3 = st.columns([18,60,70])
 
 with col1:
     st.write("")
