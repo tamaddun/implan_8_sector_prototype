@@ -103,7 +103,7 @@ st.plotly_chart(bar_chart)
 
 css = """
 img {
-    min-width: 600px;
+    min-width: 400px;
 }
 """
 # Set the CSS style for the page
