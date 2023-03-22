@@ -139,7 +139,7 @@ elif scenario_selection == 'Large Hold 10' or scenario_selection == 'Small Hold 
 else:
     image = 'holdzero.jpg'
 
-col1, col2, col3 = st.columns([18,60,60])
+col1, col2, col3 = st.columns([30,60,70])
 
 with col1:
     st.write("")
